@@ -14,12 +14,9 @@ import "phoenix_html"
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
-// import socket from "./socket"
+import socket from "./socket"
 
 import * as PIXI from "pixi.js";
-
-
-
 
 let type = "WebGL"
 if(!PIXI.utils.isWebGLSupported()){
@@ -29,8 +26,8 @@ PIXI.utils.sayHello(type)
 
 //Create a Pixi Application
 let app = new PIXI.Application({
-    width: 256,         // default: 800
-    height: 256,        // default: 600
+    width: 512,         // default: 800
+    height: 512,        // default: 600
     antialias: true,    // default: false
     transparent: false, // default: false
     resolution: 1       // default: 1
