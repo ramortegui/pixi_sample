@@ -10,6 +10,7 @@ defmodule PixiSampleWeb.RoomChannel do
 
   def handle_in("new_msg", %{"body" => body}, socket) do
     Logger.debug (body)
+    Logger.debug (IO.inspect socket.assigns[:client_id])
     broadcast!(socket, "new_msg", %{body: body})
     {:noreply, socket}
   end

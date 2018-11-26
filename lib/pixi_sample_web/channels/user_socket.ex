@@ -16,6 +16,12 @@ defmodule PixiSampleWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(_params, socket, _connect_info) do
+    #create a process for sprite
+    name = :"sprite_#{:rand.uniform(6000)}"
+    {:ok, _pid} = GenServer.start_link(PixiSample.SpriteServer, %Sprite{}, name: name)
+    socket = socket
+             |> assign(:client_id, name)
+    #send message of new sprite
     {:ok, socket}
   end
 
