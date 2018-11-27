@@ -1,4 +1,5 @@
 defmodule Sprite do
+  @derive Jason.Encoder
   defstruct [posx: 0, posy: 0, lives: 5]
 
   @moduledoc """

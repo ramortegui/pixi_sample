@@ -60,8 +60,33 @@ channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
+
+channel.on("update", payload => {
+  console.log `${payload.data}`
+})
+
 console.log(socket)
 
 channel.push("new_msg", {body: "123"} )
 
 export default socket
+
+document.addEventListener("keydown", function(event) {
+	const down = true
+
+	const {key} = event
+	switch (key) {
+		case "d":
+			channel.push("move", "right")
+			break;
+		case "a":
+			channel.push("move", "left")
+			break;
+		case "w":
+			channel.push("move", "up")
+			break;
+		case "s":
+			channel.push("move", "down")
+			break;
+	}
+})
