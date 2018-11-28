@@ -4,7 +4,15 @@ defmodule PixiSampleWeb.RoomChannel do
 
   def join("room:lobby", payload, socket) do
     Logger.debug ("joined to a room")
+    send(self, :after_join)
     {:ok, socket}
+  end
+
+  def handle_info(:after_join, socket) do
+    client_id = socket.assigns[:client_id]
+    pid = Process.whereis(client_id)
+    notify(client_id, PixiSample.SpriteServer.status(pid), socket)
+    {:noreply, socket}
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do

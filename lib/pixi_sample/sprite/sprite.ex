@@ -17,11 +17,11 @@ defmodule Sprite do
   end
 
   def move_up(%Sprite{posy: posy} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posy: posy + quantity }
+    %Sprite{ sprite | posy: posy - quantity }
   end
 
   def move_down(%Sprite{posy: posy} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posy: posy - quantity }
+    %Sprite{ sprite | posy: posy + quantity }
   end
 
   def move_upper_left(%Sprite{posx: posx, posy: posy} = sprite, quantity \\ 1) do
