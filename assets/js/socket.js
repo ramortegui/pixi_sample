@@ -78,7 +78,6 @@ channel.on("update", payload => {
     .load(create_first_sprite);
     }
    sprites[client_id] =  create_sprite(client_id)
-    console.log(sprites)
   }
 })
 
@@ -87,11 +86,8 @@ function create_first_sprite(){
 }
 
 function update_sprite(sprite, new_status){
-console.log("updataing sprite ")
-  console.log(sprite)
-  console.log(sprites)
-  sprites[sprite].vx = 5
-  sprites[sprite].vy = 5
+  sprites[sprite].vx = 2
+  sprites[sprite].vy = 2
   sprites[sprite].x += new_status.velx
   sprites[sprite].y += new_status.vely
 }
@@ -101,7 +97,6 @@ channel.push("new_msg", {body: "123"} )
 export default socket
 
 document.addEventListener("keyup", function(event) {
-  console.log(event);
 	const down = true
 	const {key} = event
 	switch (key) {
@@ -152,8 +147,8 @@ let Application = PIXI.Application,
 
 //Create a Pixi Application
 let app = new Application({
-    width: 256,
-    height: 256,
+    width: 800,
+    height: 600,
     antialias: true,
     transparent: false,
     resolution: 1
