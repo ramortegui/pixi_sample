@@ -59,7 +59,9 @@ let sprites = []
 let channel = socket.channel("room:lobby", {})
 channel.join()
   .receive("ok", resp => {
-    console.log("Joined successfully", resp) })
+    console.log("Joined successfully", resp)
+
+    })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 let client_id = null;
@@ -70,14 +72,12 @@ channel.on("update", payload => {
    update_sprite(client_id, client_status)
   }
   else{
-    console.log("New ")
-
     if(PIXI.utils.TextureCache['images/cat.png'] == undefined){
-    PIXI.loader
-    .add("images/cat.png")
-    .load(create_first_sprite);
+      PIXI.loader.add("images/cat.png").load(create_first_sprite);
     }
-   sprites[client_id] =  create_sprite(client_id)
+    else{
+      create_first_sprite()
+    }
   }
 })
 
@@ -116,7 +116,6 @@ document.addEventListener("keyup", function(event) {
 })
 
 document.addEventListener("keydown", function(event) {
-  console.log(event);
 	const down = true
 	const {key} = event
 	switch (key) {
