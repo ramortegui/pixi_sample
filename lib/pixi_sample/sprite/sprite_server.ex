@@ -19,22 +19,6 @@ defmodule PixiSample.SpriteServer do
     {:noreply, Sprite.move_down(sprite, quantity)}
   end
 
-  def handle_cast({:move_upper_left, quantity}, %Sprite{} = sprite) do
-    {:noreply, Sprite.move_upper_left(sprite, quantity)}
-  end
-
-  def handle_cast({:move_upper_right, quantity}, %Sprite{} = sprite) do
-    {:noreply, Sprite.move_upper_right(sprite, quantity)}
-  end
-
-  def handle_cast({:move_lower_left, quantity}, %Sprite{} = sprite) do
-    {:noreply, Sprite.move_lower_left(sprite, quantity)}
-  end
-
-  def handle_cast({:move_lower_right, quantity}, %Sprite{} = sprite) do
-    {:noreply, Sprite.move_lower_right(sprite, quantity)}
-  end
-
   def handle_call(:status, _from, %Sprite{} = sprite) do
     {:reply, sprite, sprite}
   end
@@ -49,22 +33,6 @@ defmodule PixiSample.SpriteServer do
 
   def move_up(pid, qty) do
     GenServer.cast(pid, {:move_up, qty})
-  end
-
-  def move_upper_left(pid, qty) do
-    GenServer.cast(pid, {:move_upper_left, qty})
-  end
-
-  def move_upper_right(pid, qty) do
-    GenServer.cast(pid, {:move_upper_right, qty})
-  end
-
-  def move_lower_left(pid, qty) do
-    GenServer.cast(pid, {:move_lower_left, qty})
-  end
-
-  def move_lower_right(pid, qty) do
-    GenServer.cast(pid, {:move_lower_right, qty})
   end
 
   def move_down(pid, qty) do

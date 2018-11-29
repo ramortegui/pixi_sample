@@ -90,29 +90,51 @@ function update_sprite(sprite, new_status){
 console.log("updataing sprite ")
   console.log(sprite)
   console.log(sprites)
-  sprites[sprite].x = new_status.posx
-  sprites[sprite].y = new_status.posy
+  sprites[sprite].vx = 5
+  sprites[sprite].vy = 5
+  sprites[sprite].x += new_status.velx
+  sprites[sprite].y += new_status.vely
 }
 
 channel.push("new_msg", {body: "123"} )
 
 export default socket
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keyup", function(event) {
+  console.log(event);
 	const down = true
-
 	const {key} = event
 	switch (key) {
-		case "d":
+		case "ArrowRight":
+			channel.push("stop", "right")
+			break;
+		case "ArrowLeft":
+			channel.push("stop", "left")
+			break;
+		case "ArrowUp":
+			channel.push("stop", "up")
+			break;
+		case "ArrowDown":
+			channel.push("stop", "down")
+			break;
+	}
+})
+
+document.addEventListener("keydown", function(event) {
+  console.log(event);
+	const down = true
+	const {key} = event
+	switch (key) {
+		case "ArrowRight":
 			channel.push("move", "right")
 			break;
-		case "a":
+		case "ArrowLeft":
 			channel.push("move", "left")
 			break;
-		case "w":
+		case "ArrowUp":
 			channel.push("move", "up")
 			break;
-		case "s":
+		case "ArrowDown":
 			channel.push("move", "down")
 			break;
 	}

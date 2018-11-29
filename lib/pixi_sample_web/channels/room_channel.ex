@@ -25,7 +25,7 @@ defmodule PixiSampleWeb.RoomChannel do
   def handle_in("move","up", socket) do
     client_id = socket.assigns[:client_id]
     pid = Process.whereis(client_id)
-    PixiSample.SpriteServer.move_up(pid, 5)
+    PixiSample.SpriteServer.move_up(pid, 3)
     notify(client_id, PixiSample.SpriteServer.status(pid), socket)
     {:noreply, socket}
   end
@@ -33,7 +33,7 @@ defmodule PixiSampleWeb.RoomChannel do
   def handle_in("move","down", socket) do
     client_id = socket.assigns[:client_id]
     pid = Process.whereis(client_id)
-    PixiSample.SpriteServer.move_down(pid, 5)
+    PixiSample.SpriteServer.move_down(pid, 3)
     notify(client_id, PixiSample.SpriteServer.status(pid), socket)
     {:noreply, socket}
   end
@@ -41,7 +41,7 @@ defmodule PixiSampleWeb.RoomChannel do
   def handle_in("move","left", socket) do
     client_id = (socket.assigns[:client_id])
     pid = Process.whereis(client_id)
-    PixiSample.SpriteServer.move_left(pid, 5)
+    PixiSample.SpriteServer.move_left(pid, 3)
     notify(client_id, PixiSample.SpriteServer.status(pid), socket)
     {:noreply, socket}
   end
@@ -49,7 +49,39 @@ defmodule PixiSampleWeb.RoomChannel do
   def handle_in("move","right", socket) do
     client_id = (socket.assigns[:client_id])
     pid = Process.whereis(client_id)
-    PixiSample.SpriteServer.move_right(pid, 5)
+    PixiSample.SpriteServer.move_right(pid, 3)
+    notify(client_id, PixiSample.SpriteServer.status(pid), socket)
+    {:noreply, socket}
+  end
+
+  def handle_in("stop","up", socket) do
+    client_id = socket.assigns[:client_id]
+    pid = Process.whereis(client_id)
+    PixiSample.SpriteServer.move_up(pid, 0)
+    notify(client_id, PixiSample.SpriteServer.status(pid), socket)
+    {:noreply, socket}
+  end
+
+  def handle_in("stop","down", socket) do
+    client_id = socket.assigns[:client_id]
+    pid = Process.whereis(client_id)
+    PixiSample.SpriteServer.move_down(pid, 0)
+    notify(client_id, PixiSample.SpriteServer.status(pid), socket)
+    {:noreply, socket}
+  end
+
+  def handle_in("stop","left", socket) do
+    client_id = (socket.assigns[:client_id])
+    pid = Process.whereis(client_id)
+    PixiSample.SpriteServer.move_left(pid, 0)
+    notify(client_id, PixiSample.SpriteServer.status(pid), socket)
+    {:noreply, socket}
+  end
+
+  def handle_in("stop","right", socket) do
+    client_id = (socket.assigns[:client_id])
+    pid = Process.whereis(client_id)
+    PixiSample.SpriteServer.move_right(pid, 0)
     notify(client_id, PixiSample.SpriteServer.status(pid), socket)
     {:noreply, socket}
   end

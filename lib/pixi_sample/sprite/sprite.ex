@@ -1,6 +1,6 @@
 defmodule Sprite do
   @derive Jason.Encoder
-  defstruct [posx: 0, posy: 0, lives: 5]
+  defstruct [velx: 0, vely: 0, lives: 5]
 
   @moduledoc """
   Documentation for Sprite.
@@ -8,36 +8,20 @@ defmodule Sprite do
 
   defguardp is_alive?(lives) when is_integer(lives) and lives > 0
 
-  def move_right(%Sprite{posx: posx, lives: lives} = sprite, quantity \\ 1) when is_alive?(lives) do
-    %Sprite{ sprite | posx: posx + quantity }
+  def move_right(%Sprite{velx: velx, lives: lives} = sprite, quantity \\ 1) when is_alive?(lives) do
+    %Sprite{ sprite | velx: quantity }
   end
 
-  def move_left(%Sprite{posx: posx} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posx: posx - quantity }
+  def move_left(%Sprite{velx: velx} = sprite, quantity \\ 1) do
+    %Sprite{ sprite | velx: -1 * quantity }
   end
 
-  def move_up(%Sprite{posy: posy} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posy: posy - quantity }
+  def move_up(%Sprite{vely: vely} = sprite, quantity \\ 1) do
+    %Sprite{ sprite | vely: (-1 * quantity)}
   end
 
-  def move_down(%Sprite{posy: posy} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posy: posy + quantity }
-  end
-
-  def move_upper_left(%Sprite{posx: posx, posy: posy} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posx: posx - quantity, posy: posy + quantity }
-  end
-
-  def move_upper_right(%Sprite{posx: posx, posy: posy} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posx: posx + quantity, posy: posy + quantity }
-  end
-
-  def move_lower_left(%Sprite{posx: posx, posy: posy} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posx: posx - quantity, posy: posy - quantity }
-  end
-
-  def move_lower_right(%Sprite{posx: posx, posy: posy} = sprite, quantity \\ 1) do
-    %Sprite{ sprite | posx: posx + quantity, posy: posy - quantity }
+  def move_down(%Sprite{vely: vely} = sprite, quantity \\ 1) do
+    %Sprite{ sprite | vely: 1 * quantity }
   end
 
   def decrease_lives(%Sprite{lives: lives} = sprite, quantity) do
