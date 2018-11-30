@@ -9,7 +9,8 @@ defmodule PixiSample.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      PixiSampleWeb.Endpoint
+      PixiSampleWeb.Endpoint,
+      PixiSample.Sprite.Registry
       # Starts a worker by calling: PixiSample.Worker.start_link(arg)
       # {PixiSample.Worker, arg},
     ]
